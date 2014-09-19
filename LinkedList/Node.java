@@ -1,26 +1,22 @@
 /** *************************************************
  * Implementation of a singlely linked list using Nodes.
  *
- * I choose to use int to hold data to keep it simple and because int
- * are easy to compare. Rather than using Object which would mean having to
- * implement some sort of compareTo().
- *
  * ************************************************** */
 
 
 class Node{
-    int data;
+    Object data;
     Node next;
 
     private int N = 1; 
     //b/c of the way the code is structured, you start at size 1, not 0.
 
     //constructor with 1 parameter to simplify creating Node objects.
-    public Node(int d){
+    public Node(Object d){
         data = d;
     }
-    
-    public void appendToTail(int d){
+
+    public void appendToTail(Object d){
         Node newTail = new Node(d);
         Node runner = this; //neat trick, reference to the "head" of list
 
@@ -63,5 +59,29 @@ class Node{
             runner = runner.next; //don't forget to increment!
         }
         return val.toString();
+    }
+
+
+    /** *************************************************
+     * Driver/Tester for LinkedList.
+     *
+     * ************************************************** */
+    public static void main(String args[]){
+
+        //java autoboxes int primatives to Integer objects using wrappers.
+        Node ll = new Node(0);
+        assert ll.size() == 1;
+
+        ll.appendToTail(1);
+        ll.appendToTail(3);
+        ll.appendToTail(5);
+        ll.appendToTail(7);
+        ll.appendToTail(9);
+        ll.appendToTail(-11);
+        assert ll.size() == 7;
+
+        System.out.println(ll.toString());
+        //assert ll.toString().equals("0 1 3 5 7 9 -11");
+        //causes assertion error, i haven't figured out why
     }
 }
